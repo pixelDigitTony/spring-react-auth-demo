@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import uy.anthony.auth.domain.repo.UserRepository;
 
 @RestController
+@RequestMapping("/api/user")
 public class UserController {
 
     @Autowired

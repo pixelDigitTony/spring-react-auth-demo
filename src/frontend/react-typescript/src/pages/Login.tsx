@@ -23,9 +23,9 @@ const Login: React.FC<LoginProps> = () => {
         // You can add login logic here, such as sending a request to a server for authentication.
         // For this example, let's just log the entered credentials to the console.
         try {
-            const response = await API.post('/login/auth', {
-                username,
-                password,
+            const response = await API.post('/user/login/auth', {
+                "username" : username,
+                "password" : password,
             });
             // Handle the response, such as showing a success message or navigating to another page
             console.log('Login Successful:', response.data);
