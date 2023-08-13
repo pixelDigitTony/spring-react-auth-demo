@@ -18,11 +18,10 @@ public class UserController {
     }
 
     @PostMapping("/login/auth")
-    public ResponseEntity<String> auth(@RequestBody LoginRequest loginRequest) {
-        System.out.println(loginRequest.username + " " + loginRequest.password);
+    public ResponseEntity<?> auth(@RequestBody LoginRequest loginRequest) {
         return userRepository.findByUsernameAndPassword(loginRequest.username, loginRequest.password)
-                .map(user -> ResponseEntity.ok("OK"))
-                .orElse(ResponseEntity.badRequest().body("Invalid username or password"));
+                .map(user -> ResponseEntity.ok().body(user))
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     public record LoginRequest(String username, String password) {
