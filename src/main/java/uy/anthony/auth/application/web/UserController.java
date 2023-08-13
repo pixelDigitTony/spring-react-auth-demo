@@ -18,6 +18,7 @@ public class UserController {
 
     @PostMapping("/login/auth")
     public ResponseEntity<String> auth(@RequestBody LoginRequest loginRequest) {
+        System.out.println(loginRequest.username + " " + loginRequest.password);
         return userRepository.findByUsernameAndPassword(loginRequest.username, loginRequest.password)
                 .map(user -> ResponseEntity.ok("OK"))
                 .orElse(ResponseEntity.badRequest().body("Invalid username or password"));
