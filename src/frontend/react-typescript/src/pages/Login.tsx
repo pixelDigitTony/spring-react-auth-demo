@@ -1,11 +1,17 @@
-import React, {useEffect, useState} from 'react';
-import {Button, Modal, TextField} from "@mui/material";
-import {AppRegistration, Logout, SendOutlined} from "@mui/icons-material";
+import {useEffect, useState} from 'react';
+import {Button, Modal} from "@mui/material";
+import {AppRegistration, Logout} from "@mui/icons-material";
 import './css/Login.css';
 import API from "../lib/Api.tsx";
 import useModal from "../hooks/useModal.tsx";
+import Form from "../components/Form.tsx";
 
 interface LoginCred {
+    username: string;
+    password: string;
+}
+
+interface RegisterCred {
     username: string;
     password: string;
 }
@@ -15,12 +21,11 @@ const Login = () => {
     const [user, setUser] = useState<LoginCred>({username: '', password: ''});
     const {isOpen, isVisible, isClosed} = useModal();
 
-    const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+    const handleLogin = async (formData: LoginCred) => {
         try {
             const response = await API.post('/user/login/auth', {
-                "username": event.currentTarget.username.value,
-                "password": event.currentTarget.password.value,
+                "username": formData.username,
+                "password": formData.password,
             });
             // Handle the response, such as showing a success message or navigating to another page
             console.log('Login Successful:', response.data);
@@ -33,9 +38,8 @@ const Login = () => {
         }
     };
 
-    const handleRegister = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        console.log('Register Successful:', event.currentTarget.username.value, event.currentTarget.password.value);
+    const handleRegister = (formData: RegisterCred) => {
+        console.log('Register Successful:', formData.username, formData.password);
     }
 
     const handleLogout = () => {
@@ -49,7 +53,7 @@ const Login = () => {
             setUser(JSON.parse(user));
             setIsLoggedIn(true);
         }
-    });
+    }, []);
 
     return (
         isLoggedIn ? (
@@ -68,64 +72,16 @@ const Login = () => {
                        className={"modal"}
                        title={"Register"}
                 >
-                    <div className={"register-container"}>
-                        <form onSubmit={handleRegister}>
-                            <div className="form-group">
-                                <TextField
-                                    id="username"
-                                    label="Username"
-                                    variant="outlined"
-                                    color="primary"
-                                />
-                            </div>
-                            <div className="form-group">
-                                <TextField
-                                    id="password"
-                                    type="password"
-                                    label="Password"
-                                    color="primary"
-                                    variant="outlined"
-                                />
-                            </div>
-                            <div className="form-group">
-                                <Button variant="outlined" className={"submit"} type="submit" endIcon={<SendOutlined/>}>
-                                    Sign-up
-                                </Button>
-                            </div>
-                        </form>
+                    <div>
+                        <Form title={"Register"} buttonSubmitLabel={"Sign-up"} onSubmit={handleRegister}/>
                     </div>
                 </Modal>
-                <div className="login-container">
-                    <h1>Login</h1>
-                    <form onSubmit={handleLogin}>
-                        <div className="form-group">
-                            <TextField
-                                id="username"
-                                label="Username"
-                                variant="outlined"
-                                color="primary"
-                            />
-                        </div>
-                        <div className="form-group">
-                            <TextField
-                                id="password"
-                                type="password"
-                                label="Password"
-                                color="primary"
-                                variant="outlined"
-                            />
-                        </div>
-                        <div className="form-group">
-                            <Button variant="outlined" className={"submit"} type="submit" endIcon={<SendOutlined/>}>
-                                Login
-                            </Button>
-                        </div>
-                        <Button variant="outlined" className={"register"} onClick={isVisible}
-                                endIcon={<AppRegistration/>}>
-                            Sign-up
-                        </Button>
-                    </form>
-                </div>
+                <Form title={"Login"} buttonSubmitLabel={"Login"} onSubmit={handleLogin}>
+                    <Button variant="outlined" className={"register"} onClick={isVisible}
+                            endIcon={<AppRegistration/>}>
+                        Sign-up
+                    </Button>
+                </Form>
             </>
         )
     );
