@@ -38,8 +38,22 @@ const Login = () => {
         }
     };
 
-    const handleRegister = (formData: RegisterCred) => {
-        console.log('Register Successful:', formData.username, formData.password);
+    const handleRegister = async (formData: RegisterCred) => {
+        try {
+            const user = {
+                "username": formData.username,
+                "password": formData.password,
+            }
+            const response = await API.post('/user/register', user);
+            // Handle the response, such as showing a success message or navigating to another page
+            console.log('Login Successful:', response.data);
+            setUser(response.data);
+            sessionStorage.setItem('user', JSON.stringify(response.data));
+            setIsLoggedIn(true);
+        } catch (error) {
+            // Handle errors, such as displaying an error message
+            console.error('Login Failed:', error);
+        }
     }
 
     const handleLogout = () => {

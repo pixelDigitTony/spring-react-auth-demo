@@ -20,8 +20,20 @@ public class UserServiceImpl implements UserService {
         if (user.isEmpty()) {
             throw new Exception("User not found");
         }
-
         return user.get();
+    }
 
+    @Override
+    public User register(User user) throws Exception {
+        Optional<User> userOptional = userRepository.findByUsername(user.getUsername());
+        if (userOptional.isPresent()) {
+            throw new Exception("User already exists");
+        }
+        userRepository.save(user);
+        Optional<User> registeredUser = userRepository.findByUsername(user.getUsername());
+        if (registeredUser.isEmpty()) {
+            throw new Exception("User not registered");
+        }
+        return registeredUser.get();
     }
 }
