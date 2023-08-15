@@ -9,7 +9,7 @@ This is a demo project for Spring Boot + ReactJS + Session based authentication.
 
 # Todo
 - [x] implement basic functionality in the back-end
-- [ ] implement basic functionality in the front-end
-- [ ] connect front-end and back-end
+- [x] implement basic functionality in the front-end
+- [x] connect front-end and back-end
 - [ ] Add Spring Security 6
 - [ ] complete readme documentation

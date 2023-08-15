@@ -9,4 +9,19 @@ const API = axios.create({
     },
 });
 
+API.interceptors.request.use((config) => {
+    // Get CSRF token from the cookie
+    const csrfToken = document.cookie
+        .split('; ')
+        .find((row) => row.startsWith('XSRF-TOKEN='))
+        ?.split('=')[1];
+
+    if (csrfToken) {
+        // Include CSRF token in the request header
+        config.headers['X-XSRF-TOKEN'] = csrfToken;
+    }
+
+    return config;
+});
+
 export default API;

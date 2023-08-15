@@ -23,7 +23,7 @@ const Login = () => {
 
     const handleLogin = async (formData: LoginCred) => {
         try {
-            const response = await API.post('/user/login/auth', {
+            const response = await API.post('/user/login', {
                 "username": formData.username,
                 "password": formData.password,
             });
@@ -44,7 +44,12 @@ const Login = () => {
                 "username": formData.username,
                 "password": formData.password,
             }
-            const response = await API.post('/user/register', user);
+            const response = await API.post('/user/register', user).then((response: any) => {
+                return API.post('/user/login', {
+                    "username": response.username,
+                    "password": response.password,
+                });
+            });
             // Handle the response, such as showing a success message or navigating to another page
             console.log('Login Successful:', response.data);
             setUser(response.data);
