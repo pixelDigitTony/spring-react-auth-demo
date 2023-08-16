@@ -8,4 +8,4 @@ CREATE TABLE users
 );
 
 INSERT INTO users (username, password)
-VALUES ('admin', '123456');
+VALUES ('admin', '$2a$10$ApRa64cEb4EG5yPPCQdp4.1/EVvR3MSev22yj6uJfYxbRXB9po40S');

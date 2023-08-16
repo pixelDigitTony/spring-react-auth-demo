@@ -23,9 +23,12 @@ const Login = () => {
 
     const handleLogin = async (formData: LoginCred) => {
         try {
-            const response = await API.post('/user/login', {
-                "username": formData.username,
-                "password": formData.password,
+            const response = await API.get('/csrf-token').then((response: any) => {
+                console.log(response.data.token)
+                return API.post('/user/login/auth', {
+                    "username": formData.username,
+                    "password": formData.password,
+                }, {withCredentials: true, headers: {'X-CSRF-TOKEN': response.data.token}});
             });
             // Handle the response, such as showing a success message or navigating to another page
             console.log('Login Successful:', response.data);
@@ -61,9 +64,16 @@ const Login = () => {
         }
     }
 
-    const handleLogout = () => {
-        sessionStorage.removeItem('user');
-        setIsLoggedIn(false);
+    const handleLogout = async () => {
+        try {
+            const response = await API.get('/user/logout');
+            alert(response.data)
+            sessionStorage.removeItem('user');
+            setIsLoggedIn(false);
+        } catch (error) {
+            // Handle errors, such as displaying an error message
+            console.error('Logout Failed:', error);
+        }
     }
 
     useEffect(() => {

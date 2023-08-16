@@ -4,7 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import uy.anthony.auth.domain.model.User;
@@ -18,6 +21,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private AuthenticationManager authenticationManager;
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     @GetMapping("/fetch-active")
@@ -26,11 +31,15 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @PostMapping("/login")
+
+    @PostMapping(value = "/login/auth", consumes = "application/json", produces = "application/json")
     public ResponseEntity<User> loginUser(@RequestBody LoginRequest loginRequest){
         try {
-            User user = userService.auth(loginRequest.username, loginRequest.password);
-            return ResponseEntity.ok(user);
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    loginRequest.username, loginRequest.password));
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            return ResponseEntity.ok((User) authentication.getPrincipal());
         } catch (Exception e) {
             log.error(e.getMessage());
             return ResponseEntity.notFound().build();
@@ -40,10 +49,20 @@ public class UserController {
     public record LoginRequest(String username, String password) {
     }
 
+    @GetMapping("/logout")
+    public ResponseEntity<String> logout() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null) {
+             throw new RuntimeException("Already Logged out!");// Clear the security context
+        }
+        SecurityContextHolder.clearContext();
+        return ResponseEntity.ok("Logged out successfully");
+    }
+
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
         try {
-//            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             return ResponseEntity.ok(userService.register(user));
         } catch (Exception e) {
             log.error(e.getMessage());
