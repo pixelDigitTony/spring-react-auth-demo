@@ -1,5 +1,6 @@
-### test login
-POST localhost:8080/login
+### test login (disable csrf at security config to successfully login)
+```
+POST localhost:8080/login/auth
 Content-Type: application/json
 
 {

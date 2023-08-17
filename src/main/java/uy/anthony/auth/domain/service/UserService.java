@@ -5,6 +5,6 @@ import uy.anthony.auth.domain.model.User;
 
 public interface UserService {
 
-    User register(User user) throws Exception;
+    void register(User user) throws Exception;
 
 }

@@ -44,10 +44,10 @@ const Login = () => {
                 "username": formData.username,
                 "password": formData.password,
             }
-            const response = await API.post('/user/register', user).then((response: any) => {
-                return API.post('/user/login', {
-                    "username": response.username,
-                    "password": response.password,
+            const response = await API.post('/user/register', user).then(() => {
+                return API.post('/user/login/auth', {
+                    "username": user.username,
+                    "password": user.password,
                 });
             });
             // Handle the response, such as showing a success message or navigating to another page

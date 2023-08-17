@@ -8,7 +8,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import uy.anthony.auth.domain.model.User;
 import uy.anthony.auth.domain.service.UserService;
@@ -19,8 +18,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
     @Autowired
     private AuthenticationManager authenticationManager;
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
@@ -62,8 +59,8 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
         try {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            return ResponseEntity.ok(userService.register(user));
+            userService.register(user);
+            return ResponseEntity.ok(user);
         } catch (Exception e) {
             log.error(e.getMessage());
             return ResponseEntity.notFound().build();

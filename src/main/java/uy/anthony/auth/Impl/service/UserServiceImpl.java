@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import uy.anthony.auth.domain.model.User;
 import uy.anthony.auth.domain.repo.UserRepository;
@@ -17,9 +18,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     public UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
-    public User register(User user) throws Exception {
+    public void register(User user) throws Exception {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         Optional<User> userOptional = userRepository.findByUsername(user.getUsername());
+        user.setIsAccountNonExpired(true);
+        user.setIsAccountNonLocked(true);
+        user.setIsCredentialsNonExpired(true);
+        user.setIsEnabled(true);
         if (userOptional.isPresent()) {
             throw new Exception("User already exists");
         }
@@ -28,7 +37,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if (registeredUser.isEmpty()) {
             throw new Exception("User not registered");
         }
-        return registeredUser.get();
     }
 
     @Override
