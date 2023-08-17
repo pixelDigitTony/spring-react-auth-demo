@@ -18,11 +18,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserRepository userRepository;
 
     @Override
-    public User auth(String username, String password) throws Exception {
-        return (User) loadUserByUsername(username);
-    }
-
-    @Override
     public User register(User user) throws Exception {
         Optional<User> userOptional = userRepository.findByUsername(user.getUsername());
         if (userOptional.isPresent()) {

@@ -23,17 +23,10 @@ const Login = () => {
 
     const handleLogin = async (formData: LoginCred) => {
         try {
-            const response = await API.get('/csrf-token').then((response: any) => {
-                console.log(response.data.token)
-                return API.post('/user/login/auth', {
-                    "username": formData.username,
-                    "password": formData.password,
-                }, {withCredentials: true, headers: {'X-CSRF-TOKEN': response.data.token}});
+            const response = await API.post('/user/login/auth', {
+                "username": formData.username,
+                "password": formData.password,
             });
-            // const response = await API.post('/user/login/auth', {
-            //     "username": formData.username,
-            //     "password": formData.password,
-            // });
             // Handle the response, such as showing a success message or navigating to another page
             console.log('Login Successful:', response.data);
             setUser(response.data);
