@@ -30,6 +30,10 @@ const Login = () => {
                     "password": formData.password,
                 }, {withCredentials: true, headers: {'X-CSRF-TOKEN': response.data.token}});
             });
+            // const response = await API.post('/user/login/auth', {
+            //     "username": formData.username,
+            //     "password": formData.password,
+            // });
             // Handle the response, such as showing a success message or navigating to another page
             console.log('Login Successful:', response.data);
             setUser(response.data);

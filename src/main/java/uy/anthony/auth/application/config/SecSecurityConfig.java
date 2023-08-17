@@ -12,6 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfTokenRequestHandler;
+import org.springframework.security.web.csrf.XorCsrfTokenRequestAttributeHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -22,9 +24,17 @@ public class SecSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        CookieCsrfTokenRepository tokenRepository = CookieCsrfTokenRepository.withHttpOnlyFalse();
+        XorCsrfTokenRequestAttributeHandler delegate = new XorCsrfTokenRequestAttributeHandler();
+        // set the name of the attribute the CsrfToken will be populated on
+        delegate.setCsrfRequestAttributeName("_csrf");
+        // Use only the handle() method of XorCsrfTokenRequestAttributeHandler and the
+        // default implementation of resolveCsrfTokenValue() from CsrfTokenRequestHandler
+        CsrfTokenRequestHandler requestHandler = delegate::handle;
         http
                 .csrf((csrf) -> csrf
-                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                          .csrfTokenRepository(tokenRepository)
+                          .csrfTokenRequestHandler(requestHandler)
                 )
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/**").permitAll()
@@ -44,7 +54,7 @@ public class SecSecurityConfig {
     }
 
     @Bean
-    public AuthenticationSuccessHandler appAuthenticationSuccessHandler(){
+    public AuthenticationSuccessHandler appAuthenticationSuccessHandler() {
         return new CustomAppAuthenticationSuccessHandler();
     }
 
