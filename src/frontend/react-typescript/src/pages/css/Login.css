@@ -13,3 +13,9 @@
     width: 100%; /* Add this line to ensure full width */
     max-width: 400px; /* Adjust the max-width as needed */
 }
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}

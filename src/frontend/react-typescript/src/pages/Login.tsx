@@ -1,12 +1,13 @@
 import {useEffect, useState} from 'react';
 import {Button, Modal} from "@mui/material";
-import {AppRegistration, Logout} from "@mui/icons-material";
+import {AppRegistration, DeleteForeverOutlined, Logout} from "@mui/icons-material";
 import './css/Login.css';
 import API from "../lib/Api.tsx";
 import useModal from "../hooks/useModal.tsx";
 import Form from "../components/Form.tsx";
 
 interface LoginCred {
+    id: string;
     username: string;
     password: string;
 }
@@ -18,10 +19,10 @@ interface RegisterCred {
 
 const Login = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [user, setUser] = useState<LoginCred>({username: '', password: ''});
+    const [user, setUser] = useState<LoginCred>({id: '', username: '', password: ''});
     const {isOpen, isVisible, isClosed} = useModal();
 
-    const handleLogin = async (formData: LoginCred) => {
+    const handleLogin = async (formData: any) => {
         try {
             const response = await API.post('/user/login/auth', {
                 "username": formData.username,
@@ -73,6 +74,18 @@ const Login = () => {
         }
     }
 
+    const handleDeleteUser = async () => {
+        try {
+            const response = await API.delete('/user/delete/'+ user.id);
+            alert(response.data)
+            sessionStorage.removeItem('user');
+            setIsLoggedIn(false);
+        } catch (error) {
+            // Handle errors, such as displaying an error message
+            console.error('Delete Failed:', error);
+        }
+    }
+
     useEffect(() => {
         const user = sessionStorage.getItem('user');
         if (user) {
@@ -85,9 +98,16 @@ const Login = () => {
         isLoggedIn ? (
             <div>
                 <h1>Welcome {user.username}</h1>
-                <Button variant="contained" onClick={handleLogout} endIcon={<Logout/>}>
-                    Logout
-                </Button>
+                <div className={"button-container"}>
+                    <Button className={"logout"} variant={"contained"} onClick={handleLogout} endIcon={<Logout/>}>
+                        Logout
+                    </Button>
+                    <Button className={"deleteUserButton"} variant={"contained"} onClick={handleDeleteUser} endIcon={<DeleteForeverOutlined />}>
+                        Delete Account
+                    </Button>
+
+                </div>
+
             </div>
         ) : (
             <>

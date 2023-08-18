@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import uy.anthony.auth.domain.model.User;
+import uy.anthony.auth.domain.repo.UserRepository;
 import uy.anthony.auth.domain.service.UserService;
 
 @RestController
@@ -20,6 +21,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private AuthenticationManager authenticationManager;
+    @Autowired
+    private UserRepository userRepository;
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     @GetMapping("/fetch-active")
@@ -60,6 +63,17 @@ public class UserController {
         try {
             userService.register(user);
             return ResponseEntity.ok(user);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Long id) {
+        try {
+            userRepository.deleteById(id);
+            return ResponseEntity.ok("User deleted successfully");
         } catch (Exception e) {
             log.error(e.getMessage());
             return ResponseEntity.notFound().build();
