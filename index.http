@@ -1,5 +1,7 @@
+### test delete (disable csrf at security config to successfully delete)
+DELETE localhost:8080/api/user/delete/4
+
 ### test login (disable csrf at security config to successfully login)
-```
 POST localhost:8080/login/auth
 Content-Type: application/json
 
@@ -8,7 +10,7 @@ Content-Type: application/json
   "password": "123456"
 }
 
-### test register
+### test register (disable csrf at security config to successfully login)
 POST localhost:8080/api/user/register
 Content-Type: application/json
 
