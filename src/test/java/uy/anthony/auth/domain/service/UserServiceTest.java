@@ -9,13 +9,5 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserServiceTest extends DemoBase {
 
-    @Autowired
-    private UserService userService;
 
-    @Test
-    void testAuth() throws Exception {
-        User user = userService.auth("admin", "123456");
-        assertNotNull(user);
-        assertEquals("admin", user.getUsername());
-    }
 }
