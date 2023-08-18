@@ -67,6 +67,9 @@ To test whether csrf protection is on. You can go to `index.http` file at the ro
 - [x] Add Spring Security 6 with session based authentication and CSRF protection
 - [x] add delete user functionality
 - [x] complete readme documentation
+- [ ] add unit tests
+- [ ] refactor API calls to use axios interceptors
+- [ ] add deployment scripts
 
 # References
 
@@ -75,3 +78,4 @@ To test whether csrf protection is on. You can go to `index.http` file at the ro
 * [React folder architecture](https://blog.webdevsimplified.com/2022-07/react-folder-structure/)
 * [what is a csrf attack](https://www.imperva.com/learn/application-security/csrf-cross-site-request-forgery/)
 * [Create a spring security login form](https://www.baeldung.com/spring-security-login)
+* [Domain Driven Design Architecture (DDD)](https://www.geeksforgeeks.org/domain-driven-design-ddd/)
