@@ -26,7 +26,10 @@ const Login = () => {
         try {
             const response = await LoginApi.login(formData);
             // Handle the response, such as showing a success message or navigating to another page
-            console.log('Login Successful:', response);
+            if(response === undefined) {
+                alert("Login failed")
+               return;
+            }
             setUser(response);
             sessionStorage.setItem('user', JSON.stringify(response));
             setIsLoggedIn(true);

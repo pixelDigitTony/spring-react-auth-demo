@@ -13,7 +13,6 @@ const LoginApi = {
                 "password": formData.password,
             });
             // Handle the response, such as showing a success message or navigating to another page
-            console.log('Login Successful:', response.data);
             return response.data
         } catch (error) {
             // Handle errors, such as displaying an error message
@@ -22,7 +21,7 @@ const LoginApi = {
     },
     register: async function(user: RegisterCred) {
         const response = await API.post('/v1/user/register/create', user).then(() => {
-            return API.post('/user/login/auth', {
+            return API.post('/v1/user/login/auth', {
                 "username": user.username,
                 "password": user.password,
             });
