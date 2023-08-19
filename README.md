@@ -68,7 +68,7 @@ To test whether csrf protection is on. You can go to `index.http` file at the ro
 - [x] add delete user functionality
 - [x] complete readme documentation
 - [x] add unit tests
-- [ ] refactor API calls to use axios interceptors
+- [ ] refactor API calls, and build an API Layer
 - [ ] add deployment scripts
 
 # References
@@ -80,3 +80,4 @@ To test whether csrf protection is on. You can go to `index.http` file at the ro
 * [Create a spring security login form](https://www.baeldung.com/spring-security-login)
 * [Domain Driven Design Architecture (DDD)](https://www.geeksforgeeks.org/domain-driven-design-ddd/)
 * [Building an API layer in react](https://semaphoreci.com/blog/api-layer-react)
+* [How to version a rest api](https://www.freecodecamp.org/news/how-to-version-a-rest-api/)

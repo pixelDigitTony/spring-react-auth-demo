@@ -2,9 +2,9 @@ import {useEffect, useState} from 'react';
 import {Button, Modal} from "@mui/material";
 import {AppRegistration, DeleteForeverOutlined, Logout} from "@mui/icons-material";
 import './css/Login.css';
-import API from "../lib/Api.tsx";
 import useModal from "../hooks/useModal.tsx";
 import Form from "../components/Form.tsx";
+import LoginApi from "../lib/LoginApi.tsx";
 
 interface LoginCred {
     id: string;
@@ -24,14 +24,11 @@ const Login = () => {
 
     const handleLogin = async (formData: any) => {
         try {
-            const response = await API.post('/user/login/auth', {
-                "username": formData.username,
-                "password": formData.password,
-            });
+            const response = await LoginApi.login(formData);
             // Handle the response, such as showing a success message or navigating to another page
-            console.log('Login Successful:', response.data);
-            setUser(response.data);
-            sessionStorage.setItem('user', JSON.stringify(response.data));
+            console.log('Login Successful:', response);
+            setUser(response);
+            sessionStorage.setItem('user', JSON.stringify(response));
             setIsLoggedIn(true);
         } catch (error) {
             // Handle errors, such as displaying an error message
@@ -41,20 +38,15 @@ const Login = () => {
 
     const handleRegister = async (formData: RegisterCred) => {
         try {
-            const user = {
+            const userReg = {
                 "username": formData.username,
                 "password": formData.password,
             }
-            const response = await API.post('/user/register', user).then(() => {
-                return API.post('/user/login/auth', {
-                    "username": user.username,
-                    "password": user.password,
-                });
-            });
+            const response = await LoginApi.register(userReg);
             // Handle the response, such as showing a success message or navigating to another page
-            console.log('Login Successful:', response.data);
-            setUser(response.data);
-            sessionStorage.setItem('user', JSON.stringify(response.data));
+            console.log('Login Successful:', response);
+            setUser(response);
+            sessionStorage.setItem('user', JSON.stringify(response));
             setIsLoggedIn(true);
         } catch (error) {
             // Handle errors, such as displaying an error message
@@ -64,8 +56,8 @@ const Login = () => {
 
     const handleLogout = async () => {
         try {
-            const response = await API.get('/user/logout');
-            alert(response.data)
+            const response = await LoginApi.logout();
+            alert(response)
             sessionStorage.removeItem('user');
             setIsLoggedIn(false);
         } catch (error) {
@@ -76,8 +68,8 @@ const Login = () => {
 
     const handleDeleteUser = async () => {
         try {
-            const response = await API.delete('/user/delete/'+ user.id);
-            alert(response.data)
+            const response = await LoginApi.deleteUser(user.id);
+            alert(response)
             sessionStorage.removeItem('user');
             setIsLoggedIn(false);
         } catch (error) {

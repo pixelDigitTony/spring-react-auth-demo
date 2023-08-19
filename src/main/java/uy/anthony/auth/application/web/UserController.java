@@ -14,7 +14,7 @@ import uy.anthony.auth.domain.repo.UserRepository;
 import uy.anthony.auth.domain.service.UserService;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/v1/user")
 public class UserController {
 
     @Autowired
@@ -58,7 +58,7 @@ public class UserController {
         return ResponseEntity.ok("Logged out successfully");
     }
 
-    @PostMapping("/register")
+    @PostMapping("/register/create")
     public ResponseEntity<?> register(@RequestBody User user) {
         try {
             userService.register(user);
