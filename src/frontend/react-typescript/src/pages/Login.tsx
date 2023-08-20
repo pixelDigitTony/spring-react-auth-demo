@@ -26,7 +26,7 @@ const Login = () => {
         try {
             const response = await LoginApi.login(formData);
             // Handle the response, such as showing a success message or navigating to another page
-            if(response === undefined) {
+            if(response === 404) {
                 alert("Login failed")
                return;
             }
@@ -46,6 +46,10 @@ const Login = () => {
                 "password": formData.password,
             }
             const response = await LoginApi.register(userReg);
+            if(response === 404) {
+                alert("Login Failed")
+                return;
+            }
             // Handle the response, such as showing a success message or navigating to another page
             console.log('Login Successful:', response);
             setUser(response);
