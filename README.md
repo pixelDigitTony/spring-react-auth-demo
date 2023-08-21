@@ -69,7 +69,7 @@ To test whether csrf protection is on. You can go to `index.http` file at the ro
 - [x] complete readme documentation
 - [x] add unit tests
 - [x] refactor API calls, and build an API Layer
-- [] add deployment scripts
+- [ ] add deployment scripts
 - [x] add error handling in the front-end for axios calls
 # References
 
@@ -82,3 +82,5 @@ To test whether csrf protection is on. You can go to `index.http` file at the ro
 * [Building an API layer in react](https://semaphoreci.com/blog/api-layer-react)
 * [How to version a rest api](https://www.freecodecamp.org/news/how-to-version-a-rest-api/)
 * [Handling axios api calls](https://blog.bitsrc.io/api-call-in-react-using-axios-handling-complicated-scenarios-befff1655abc)
+* [Build spring react project with maven](https://developer.okta.com/blog/2022/06/17/simple-crud-react-and-spring-boot)
+* [github repo for frontend-maven-plugin](https://github.com/eirslett/frontend-maven-plugin)
