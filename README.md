@@ -83,4 +83,5 @@ To test whether csrf protection is on. You can go to `index.http` file at the ro
 * [How to version a rest api](https://www.freecodecamp.org/news/how-to-version-a-rest-api/)
 * [Handling axios api calls](https://blog.bitsrc.io/api-call-in-react-using-axios-handling-complicated-scenarios-befff1655abc)
 * [Build spring react project with maven](https://developer.okta.com/blog/2022/06/17/simple-crud-react-and-spring-boot)
-* [github repo for frontend-maven-plugin](https://github.com/eirslett/frontend-maven-plugin)
+* [GitHub repo for frontend-maven-plugin](https://github.com/eirslett/frontend-maven-plugin)
+* [Including react in your spring boot maven build](https://medium.com/@itzgeoff/including-react-in-your-spring-boot-maven-build-ae3b8f8826e)
