@@ -47,6 +47,14 @@ you can now start using the application.
 
 To test whether csrf protection is on. You can go to `index.http` file at the root directory of the project and run a request. If the request is forbidden, then csrf protection is working. If not, then csrf protection is not working. If you want the request to proceed, disable the csrf protection at the security config of the app.
 
+# Packaging
+
+```sh
+java -jar target/spring-react-auth-demo-0.0.1-SNAPSHOT.jar
+```
+
+
+
 # Other Tools Used
 
 * [Spring Boot v3.1.1](https://spring.io/projects/spring-boot)

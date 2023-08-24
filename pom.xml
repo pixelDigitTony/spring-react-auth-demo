@@ -17,7 +17,6 @@
         <java.version>17</java.version>
         <frontend-src-dir>${project.basedir}/src/frontend/react-typescript</frontend-src-dir>
         <node.version>v14.17.2</node.version>
-        <npm.version>v8.4.1</npm.version>
         <frontend-maven-plugin.version>1.13.4</frontend-maven-plugin.version>
     </properties>
     <dependencies>
@@ -96,7 +95,6 @@
 
                 <configuration>
                     <nodeVersion>${node.version}</nodeVersion>
-                    <npmVersion>${npm.version}</npmVersion>
                     <workingDirectory>${frontend-src-dir}</workingDirectory>
                     <installDirectory>${project.build.directory}</installDirectory>
                 </configuration>
@@ -129,7 +127,6 @@
                             <arguments>install</arguments>
                         </configuration>
                     </execution>
-
                     <execution>
                         <id>build-frontend</id>
                         <goals>
@@ -137,7 +134,7 @@
                         </goals>
                         <phase>prepare-package</phase>
                         <configuration>
-                            <arguments>build</arguments>
+                            <arguments>run build</arguments>
                         </configuration>
                     </execution>
                 </executions>
@@ -156,7 +153,7 @@
                             <outputDirectory>${project.build.outputDirectory}/static</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${frontend-src-dir}/build</directory>
+                                    <directory>${frontend-src-dir}/dist</directory>
                                     <filtering>false</filtering>
                                 </resource>
                             </resources>
@@ -168,10 +165,15 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
             </resource>
             <resource>
-                <directory>src/main/frontend/dist/react-typescript</directory>
-                <targetPath>static</targetPath>
+                <directory>target/classes/static</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
             </resource>
         </resources>
     </build>

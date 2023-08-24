@@ -31,6 +31,11 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "/";
+    }
+
     @PostMapping(value = "/login/auth", consumes = "application/json", produces = "application/json")
     public ResponseEntity<User> loginUser(@RequestBody LoginRequest loginRequest){
         try {
