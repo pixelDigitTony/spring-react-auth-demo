@@ -37,7 +37,7 @@ public class SecSecurityConfig {
                           .csrfTokenRequestHandler(requestHandler)
                 )
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/**").permitAll()
+                        .requestMatchers("/**", "/", "/index.html", "/static/**").permitAll()
                         .anyRequest().hasAuthority("USER")
                 )
                 .formLogin(form -> form

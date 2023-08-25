@@ -25,6 +25,11 @@
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
         <!-- Spring Web -->
 
         <dependency>
@@ -139,28 +144,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.0.1</version>
-                <executions>
-                    <execution>
-                        <id>position-react-build</id>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <phase>prepare-package</phase>
-                        <configuration>
-                            <outputDirectory>${project.build.outputDirectory}/static</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>${frontend-src-dir}/dist</directory>
-                                    <filtering>false</filtering>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
         <resources>
             <resource>
@@ -170,7 +153,7 @@
                 </includes>
             </resource>
             <resource>
-                <directory>target/classes/static</directory>
+                <directory>target/classes</directory>
                 <includes>
                     <include>**/*</include>
                 </includes>
