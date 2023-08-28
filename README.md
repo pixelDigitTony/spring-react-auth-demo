@@ -95,12 +95,11 @@ This section teaches how to install, run and test the application.
 * ```sh
     docker-compose up
     ```
-2. wait for the docker containers to be up and running before proceeding to the next step.
-3. run the command
+2. After waiting for the docker container to set up. run the command
 * ```bash
     ./mvnw clean install
     ```
-4. After waiting for the build to finish, run the application from the main class [AuthApplication.java](src/main/java/uy/anthony/auth/AuthApplication.java). The frontend will be served from the backend server. No need to run dev server for the frontend. You can go to [http://localhost:8181](http://localhost:8181) to see the application running.
+3. After waiting for the build to finish, run the application from the main class [AuthApplication.java](src/main/java/uy/anthony/auth/AuthApplication.java). The frontend will be served from the backend server. No need to run dev server for the frontend. You can go to [http://localhost:8181](http://localhost:8181) to see the application running.
    You should then be seeing this page:
     ![login page](img/login-page.png)
 
