@@ -3,7 +3,7 @@ This is a demo project for Spring Boot + ReactJS + Session based authentication.
 
 # Project Structure
 
-The project is divided into 3 parts: the front-end, the back-end, and tests. The front-end is built using ReactJS, and the back-end is built using Spring Boot. The front-end is served from the back-end server. The front-end is located at [src/frontend](src/main/frontend/react-typescript), and the back-end is located at [src/main](src/main).
+The project is divided into 3 parts: the front-end, the back-end, and tests. The front-end is built using ReactJS, and the back-end is built using Spring Boot. The front-end is served from the back-end server. The front-end is located at [src/frontend](src/frontend/react-typescript), and the back-end is located at [src/main](src/main).
 
 here's what the project structure looks like when you open the src folder:
 ## Backend
