@@ -1,6 +1,78 @@
 # Spring React Authentication Demo
 This is a demo project for Spring Boot + ReactJS + Session based authentication. This is to show how to implement spring security 6, and storing csrf token in session cookies when authenticating user.
 
+# Project Structure
+
+The project is divided into 3 parts: the front-end, the back-end, and tests. The front-end is built using ReactJS, and the back-end is built using Spring Boot. The front-end is served from the back-end server. The front-end is located at [src/frontend](src/main/frontend/react-typescript), and the back-end is located at [src/main](src/main).
+
+here's what the project structure looks like when you open the src folder:
+## Backend
+```
+C:.
+├─main
+│  ├─java
+│  │  └─uy
+│  │      └─anthony
+│  │          └─auth
+│  │              ├─application
+│  │              │  ├─common
+│  │              │  ├─config
+│  │              │  └─web
+│  │              ├─domain
+│  │              │  ├─model
+│  │              │  ├─repo
+│  │              │  └─service
+│  │              └─Impl
+│  │                  └─service
+│  └─resources
+│      ├─db
+│      │  └─migration
+│      └─static
+│          └─assets
+└─test
+    └─java
+        └─uy
+            └─anthony
+                └─auth
+                    ├─application
+                    │  └─config
+                    ├─domain
+                    │  └─service
+                    └─Impl
+
+```
+
+## Frontend
+```
+C:.
+└─frontend
+  └─react-typescript
+      ├─public
+      └─src
+          ├─assets
+          ├─components
+          │  └─css
+          ├─hooks
+          ├─lib
+          └─pages
+              └─css
+```
+
+## Tests
+```
+C:.
+└─test
+    └─java
+        └─uy
+            └─anthony
+                └─auth
+                    ├─application
+                    │  └─config
+                    ├─domain
+                    │  └─service
+                    └─Impl
+```
+
 # Features
 * Login
 * Registration
@@ -51,6 +123,7 @@ To test whether csrf protection is on. You can go to [index.http](./index.http) 
 
 * [Spring Boot v3.1.1](https://spring.io/projects/spring-boot)
 * [Spring Security v6.1.1](https://spring.io/projects/spring-security)
+* [Thymeleaf](https://www.thymeleaf.org)
 * [ReactJS v18.2.0](https://reactjs.org/)
 * [Axios v1.4.0](https://axios-http.com/docs/intro)
 * [Typescript v5.0.2](https://www.typescriptlang.org)
@@ -85,3 +158,4 @@ To test whether csrf protection is on. You can go to [index.http](./index.http) 
 * [Build spring react project with maven](https://developer.okta.com/blog/2022/06/17/simple-crud-react-and-spring-boot)
 * [GitHub repo for frontend-maven-plugin](https://github.com/eirslett/frontend-maven-plugin)
 * [Including react in your spring boot maven build](https://medium.com/@itzgeoff/including-react-in-your-spring-boot-maven-build-ae3b8f8826e)
+* [Serve Static Resources with Spring](https://www.baeldung.com/spring-mvc-static-resources#:~:text=Spring%20Boot%20comes%20with%20a,that%20are%20on%20the%20classpath.)
