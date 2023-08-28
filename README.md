@@ -19,41 +19,33 @@ This section teaches how to install, run and test the application.
 
 ## Installation
 
-### Backend
-
 1. After cloning the project, change directory into the project directory `spring-react-auth-demo`, and run the command. Make sure you have docker installed and running.
-```sh
-docker-compose up
-```
+* ```sh
+    docker-compose up
+    ```
 2. wait for the docker containers to be up and running before proceeding to the next step.
 3. run the command
-```bash
-./mvnw clean install -Dskip
-```
-4. After everything is finished, run the application from the main class `src/main/java/uy/anthony/auth/AuthApplication.java`
-
-### Frontend
-1. change directory to `src/frontend/react-typescript` and run
-```sh
-npm install
-```
-2. then run
-```sh
-npm run dev
-```
-you can now start using the application.
+* ```bash
+    ./mvnw clean install
+    ```
+4. After waiting for the build to finish, run the application from the main class [AuthApplication.java](src/main/java/uy/anthony/auth/AuthApplication.java). The frontend will be served from the backend server. No need to run dev server for the frontend. You can go to [http://localhost:8181](http://localhost:8181) to see the application running.
+   You should then be seeing this page:
+    ![login page](img/login-page.png)
 
 ## Testing
 
-To test whether csrf protection is on. You can go to `index.http` file at the root directory of the project and run a request. If the request is forbidden, then csrf protection is working. If not, then csrf protection is not working. If you want the request to proceed, disable the csrf protection at the security config of the app.
+To test whether csrf protection is on. You can go to [index.http](./index.http) file at the root directory of the project and run a request. If the request is forbidden, then csrf protection is working. If not, then csrf protection is not working. If you want the request to proceed, disable the csrf protection at the security config of the app.
 
 # Packaging
-
-```sh
-java -jar target/spring-react-auth-demo-0.0.1-SNAPSHOT.jar
-```
-
-
+1. To package the application, run the command
+* ```sh
+    ./mvnw clean install
+    ```
+2. Wait for the build to finish, then run the command (make sure the postgres container in docker is running)
+* ```sh
+    java -jar target/spring-react-auth-demo-0.0.1-SNAPSHOT.jar
+    ```
+    This will run the application in production mode with the front-end bundled in the jar file.
 
 # Other Tools Used
 
@@ -77,7 +69,7 @@ java -jar target/spring-react-auth-demo-0.0.1-SNAPSHOT.jar
 - [x] complete readme documentation
 - [x] add unit tests
 - [x] refactor API calls, and build an API Layer
-- [ ] add deployment scripts
+- [x] add deployment scripts
 - [x] add error handling in the front-end for axios calls
 # References
 

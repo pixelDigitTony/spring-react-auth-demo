@@ -41,6 +41,7 @@ public class SecSecurityConfig {
                         .anyRequest().hasAuthority("USER")
                 )
                 .formLogin(form -> form
+                        .loginPage("/")
                         .permitAll()
                         .successHandler(customAppAuthenticationSuccessHandler)
                 );
