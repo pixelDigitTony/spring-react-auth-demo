@@ -106,6 +106,7 @@ This section teaches how to install, run and test the application.
 ## Testing
 
 To test whether csrf protection is on. You can go to [index.http](./index.http) file at the root directory of the project and run a request. If the request is forbidden, then csrf protection is working. If not, then csrf protection is not working. If you want the request to proceed, disable the csrf protection at the security config of the app.
+You can also check [health](localhost:8181/actuator/health) of the application when it's running.
 
 # Packaging
 1. To package the application, run the command
