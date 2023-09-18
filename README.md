@@ -159,3 +159,4 @@ You can also check [health](localhost:8181/actuator/health) of the application w
 * [GitHub repo for frontend-maven-plugin](https://github.com/eirslett/frontend-maven-plugin)
 * [Including react in your spring boot maven build](https://medium.com/@itzgeoff/including-react-in-your-spring-boot-maven-build-ae3b8f8826e)
 * [Serve Static Resources with Spring](https://www.baeldung.com/spring-mvc-static-resources#:~:text=Spring%20Boot%20comes%20with%20a,that%20are%20on%20the%20classpath.)
+* [Spring Actuators](https://www.baeldung.com/spring-boot-actuators)
